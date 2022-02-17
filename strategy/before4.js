@@ -19,7 +19,7 @@ class Calculator {
     }
 }
 
-console.log(new Calculator().calculate(true, [
+console.log(new Calculator().calculate(false, [
     {name: 'melon', price: 1000, isFresh: true},
     {name: 'apple', price: 2000, isFresh: false},
 ]))
