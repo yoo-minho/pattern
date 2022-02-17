@@ -1,7 +1,6 @@
 class Calculator {
     constructor(discountStrategy) {
         this.discountStrategy = discountStrategy;
-
     }
 
     calculate(items) {

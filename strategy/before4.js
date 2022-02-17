@@ -1,3 +1,7 @@
+//전략을 갈아 끼워야하는거랑
+//전략을 계속 더하는 거랑은 조금 느낌이 다른거 같다.
+//아래는 적절한 예가 아닌 것 같아.
+
 function calculate(items, firstGuest) {
     return items.map(v => {
         let _price = v.price;
