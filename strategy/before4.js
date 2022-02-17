@@ -1,25 +1,47 @@
-class Calculator {
-    calculate(firstGuest, items) {
-        let sum = 0;
-        items.forEach(v => {
-            const {
-                price,
-                isFresh
-            } = v;
-            if (firstGuest) {
-                sum += price * 0.9; // 첫 손님 10% 할인
-            } else if (!isFresh) {
-                sum += price * 0.8; // 덜 신선한 것 20% 할인
-            } else {
-                sum += price;
-            }
-            //애초에 이게 맞나? 첫 고객은 덜신선해도 10% 할인이라는게?
-        })
-        return sum;
-    }
+function calculate(items, firstGuest) {
+    return items.map(v => {
+        let _price = v.price;
+        if (firstGuest) {
+            _price = v.price * 0.7; // 첫 손님 30% 할인
+        } else if (!v.isFresh) {
+            _price = v.price * 0.8; // 덜 신선한 것 20% 할인
+        }
+        return {
+            ...v,
+            price: _price
+        }
+    })
 }
 
-console.log(new Calculator().calculate(false, [
-    {name: 'melon', price: 1000, isFresh: true},
-    {name: 'apple', price: 2000, isFresh: false},
-]))
+function sumPrice(items) {
+    return items.reduce((partialSum, a) => partialSum + a.price, 0);
+}
+
+const minho = {
+    name: 'minho',
+    isBuyFirst: false,
+    basket: [
+        {name: 'melon', price: 1000, isFresh: true}, //700
+        {name: 'melon', price: 1000, isFresh: false}, //700
+        {name: 'melon', price: 1000, isFresh: false}, //700
+        {name: 'apple', price: 2000, isFresh: true}, //1400
+        {name: 'apple', price: 2000, isFresh: false}, //1400
+    ]
+}
+console.log(minho.name,
+    '총가격:',
+    sumPrice(
+        calculate(minho.basket, minho.isBuyFirst)));
+
+const aram = {
+    name: 'aram',
+    isBuyFirst: true,
+    basket: [
+        {name: 'melon', price: 1000, isFresh: true}, //700
+        {name: 'apple', price: 2000, isFresh: true}, //1400
+    ]
+}
+console.log(aram.name,
+    '총가격:',
+    sumPrice(
+        calculate(aram.basket, aram.isBuyFirst)));
